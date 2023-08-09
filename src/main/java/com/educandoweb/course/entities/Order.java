@@ -6,8 +6,6 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import org.hibernate.annotations.Cascade;
-
 import com.educandoweb.course.entities.enums.OrderStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -106,6 +104,15 @@ public class Order implements Serializable{
 		return items;
 	}
 	
+	
+	public Double getTotal() {
+		Double sum = 0.0;
+		for(OrderItem i : items) {
+			sum += i.getSubTotal();
+		}
+		
+		return sum;
+	}
 
 	@Override
 	public int hashCode() {
@@ -123,6 +130,8 @@ public class Order implements Serializable{
 		Order other = (Order) obj;
 		return Objects.equals(id, other.id);
 	}
+	
+
 	
 	
 	
